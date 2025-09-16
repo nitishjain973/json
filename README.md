@@ -1,1 +1,1 @@
-tetsing statics json for hosting
+tetsing static json for hosting
