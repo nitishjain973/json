@@ -1,0 +1,430 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.pg{padding:1rem 0 2rem}
+.lbl{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--color-text-tertiary);margin-bottom:.75rem;margin-top:1.75rem}
+.lbl:first-child{margin-top:0}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:.75rem}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:.75rem}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.25rem}
+.met{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.875rem 1rem;text-align:center}
+.met-v{font-size:20px;font-weight:500;color:var(--color-text-primary);line-height:1.1}
+.met-l{font-size:11px;color:var(--color-text-tertiary);margin-top:4px;line-height:1.4}
+
+.etf-card{border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);overflow:hidden;margin-bottom:.75rem}
+.etf-head{padding:.875rem 1rem .5rem}
+.etf-ticker{font-size:15px;font-weight:500;margin-bottom:2px}
+.etf-index{font-size:11px;margin-bottom:6px}
+.etf-body{padding:.5rem 1rem .875rem;border-top:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary)}
+.er{display:flex;justify-content:space-between;font-size:12px;padding:3px 0}
+.erl{color:var(--color-text-tertiary)}
+.erv{font-weight:500;color:var(--color-text-secondary);text-align:right}
+.pill{display:inline-block;font-size:10px;font-weight:500;padding:1px 7px;border-radius:8px;margin-top:5px}
+
+.rule-block{border-radius:var(--border-radius-lg);overflow:hidden;margin-bottom:.75rem}
+.rule-head{padding:.75rem 1rem;font-size:13px;font-weight:500}
+.rule-body{padding:.75rem 1rem 1rem;background:var(--color-background-primary);border-top:0.5px solid var(--color-border-tertiary)}
+.rule-item{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:12px}
+.rule-item:last-child{border-bottom:none}
+.ri-num{font-size:10px;font-weight:500;min-width:28px;padding-top:2px}
+.ri-body{color:var(--color-text-secondary);line-height:1.6}
+.ri-body b{font-weight:500;color:var(--color-text-primary)}
+.ri-body code{font-family:var(--font-mono);font-size:11px;background:var(--color-background-secondary);padding:1px 4px;border-radius:3px}
+
+.regime-row{display:flex;gap:0;margin-bottom:.75rem;border-radius:var(--border-radius-lg);overflow:hidden;border:0.5px solid var(--color-border-tertiary)}
+.rc{flex:1;padding:.75rem .875rem;text-align:center;border-right:0.5px solid var(--color-border-tertiary)}
+.rc:last-child{border-right:none}
+.rc-label{font-size:11px;color:var(--color-text-tertiary);margin-bottom:4px}
+.rc-pct{font-size:18px;font-weight:500}
+.rc-name{font-size:10px;margin-top:2px}
+
+.sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.75rem}
+.sig-card{border-radius:var(--border-radius-md);padding:.75rem 1rem;border:0.5px solid var(--color-border-tertiary)}
+.sig-label{font-size:11px;font-weight:500;color:var(--color-text-tertiary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+.sig-formula{font-family:var(--font-mono);font-size:11px;color:var(--color-text-primary);line-height:1.7;background:var(--color-background-secondary);border-radius:4px;padding:.5rem .75rem;margin-top:4px}
+
+.phase-track{display:flex;flex-direction:column;gap:8px;margin-bottom:.75rem}
+.phase-row{display:flex;gap:8px;align-items:center}
+.ph-label{font-size:12px;font-weight:500;min-width:90px;color:var(--color-text-secondary)}
+.ph-bar-wrap{flex:1;position:relative;height:32px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);overflow:hidden;display:flex}
+.ph-seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500}
+
+.compare-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.compare-tbl th{text-align:center;padding:7px 8px;background:var(--color-background-secondary);color:var(--color-text-secondary);font-weight:500;border-bottom:0.5px solid var(--color-border-tertiary);font-size:11px}
+.compare-tbl th:first-child{text-align:left}
+.compare-tbl td{padding:7px 8px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);text-align:center}
+.compare-tbl td:first-child{text-align:left;font-weight:500;color:var(--color-text-primary)}
+.compare-tbl tr:last-child td{border-bottom:none}
+
+.warn-band{border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:.7rem 1rem;margin-bottom:6px;border-left:3px solid}
+.wb-a{background:#FAEEDA;border-color:#854F0B}
+.wb-a p{font-size:12px;color:#633806;line-height:1.6}
+.wb-a p b{color:#412402}
+.wb-g{background:#EAF3DE;border-color:#3B6D11}
+.wb-g p{font-size:12px;color:#27500A;line-height:1.6}
+.wb-g p b{color:#173404}
+.wb-b{background:#E6F1FB;border-color:#185FA5}
+.wb-b p{font-size:12px;color:#0C447C;line-height:1.6}
+.wb-b p b{color:#042C53}
+.wb-r{background:#FCEBEB;border-color:#A32D2D}
+.wb-r p{font-size:12px;color:#791F1F;line-height:1.6}
+.wb-r p b{color:#501313}
+
+.tab-row{display:flex;gap:2px;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:0}
+.tab{font-size:12px;padding:6px 14px;cursor:pointer;color:var(--color-text-secondary);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab.on{color:var(--color-text-primary);border-bottom-color:var(--color-text-primary);font-weight:500}
+.panel{display:none;padding-top:1rem}.panel.on{display:block}
+
+.step-row{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.step-row:last-child{border-bottom:none}
+.sn{width:22px;height:22px;border-radius:50%;background:var(--color-background-info);color:var(--color-text-info);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;margin-top:1px}
+.sb2{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+.sb2 b{font-weight:500;color:var(--color-text-primary)}
+.sb2 code{font-family:var(--font-mono);font-size:11px;background:var(--color-background-secondary);padding:1px 4px;border-radius:3px}
+</style>
+
+<div class="pg">
+<h2 class="sr-only">Smart beta factor rotation strategy — 4 ETF rule-based system for Indian market with quantitative switching rules</h2>
+
+<div class="lbl">Strategy overview</div>
+<div class="g4">
+  <div class="met"><div class="met-v">4</div><div class="met-l">Smart beta ETFs</div></div>
+  <div class="met"><div class="met-v">3</div><div class="met-l">Market regimes</div></div>
+  <div class="met"><div class="met-v">6</div><div class="met-l">Quantitative signals</div></div>
+  <div class="met"><div class="met-v">Semi-annual</div><div class="met-l">Mandatory rebalance</div></div>
+</div>
+
+<div class="lbl">The 4 ETFs — your entire universe</div>
+
+<div class="g2">
+  <div class="etf-card">
+    <div class="etf-head" style="background:#EAF3DE">
+      <div class="etf-ticker" style="color:#3B6D11">MOM30IETF</div>
+      <div class="etf-index" style="color:#27500A">ICICI Pru Nifty 200 Momentum 30 ETF</div>
+      <span class="pill" style="background:#C0DD97;color:#173404">ETF A — Momentum</span>
+    </div>
+    <div class="etf-body">
+      <div class="er"><span class="erl">Tracks</span><span class="erv">Nifty 200 Momentum 30</span></div>
+      <div class="er"><span class="erl">Expense ratio</span><span class="erv">~0.35%</span></div>
+      <div class="er"><span class="erl">Factor logic</span><span class="erv">6M + 12M price momentum score</span></div>
+      <div class="er"><span class="erl">Rebalances</span><span class="erv">Semi-annual (Jun/Dec)</span></div>
+      <div class="er"><span class="erl">Behaviour</span><span class="erv">Shines in strong uptrends, bleeds in reversals</span></div>
+    </div>
+  </div>
+  <div class="etf-card">
+    <div class="etf-head" style="background:#FAEEDA">
+      <div class="etf-ticker" style="color:#854F0B">ALPHA</div>
+      <div class="etf-index" style="color:#633806">Kotak Nifty Alpha 50 ETF</div>
+      <span class="pill" style="background:#FAC775;color:#412402">ETF B — Alpha</span>
+    </div>
+    <div class="etf-body">
+      <div class="er"><span class="erl">Tracks</span><span class="erv">Nifty Alpha 50</span></div>
+      <div class="er"><span class="erl">Expense ratio</span><span class="erv">~0.25%</span></div>
+      <div class="er"><span class="erl">Factor logic</span><span class="erv">Jensen's Alpha vs Nifty 500 over 1yr</span></div>
+      <div class="er"><span class="erl">Rebalances</span><span class="erv">Quarterly</span></div>
+      <div class="er"><span class="erl">Behaviour</span><span class="erv">Highest return potential, highest volatility</span></div>
+    </div>
+  </div>
+  <div class="etf-card">
+    <div class="etf-head" style="background:#E6F1FB">
+      <div class="etf-ticker" style="color:#185FA5">ALPL30IETF</div>
+      <div class="etf-index" style="color:#0C447C">ICICI Pru Nifty Alpha Low Volatility 30 ETF</div>
+      <span class="pill" style="background:#85B7EB;color:#042C53">ETF C — Alpha+LowVol</span>
+    </div>
+    <div class="etf-body">
+      <div class="er"><span class="erl">Tracks</span><span class="erv">Nifty Alpha Low Volatility 30</span></div>
+      <div class="er"><span class="erl">Expense ratio</span><span class="erv">~0.28%</span></div>
+      <div class="er"><span class="erl">Factor logic</span><span class="erv">Alpha score × (1/Volatility) composite rank</span></div>
+      <div class="er"><span class="erl">Rebalances</span><span class="erv">Semi-annual</span></div>
+      <div class="er"><span class="erl">Behaviour</span><span class="erv">Balanced — captures upside, limits downside</span></div>
+    </div>
+  </div>
+  <div class="etf-card">
+    <div class="etf-head" style="background:#EEEDFE">
+      <div class="etf-ticker" style="color:#534AB7">QUAL30</div>
+      <div class="etf-index" style="color:#3C3489">DSP Nifty 50 Equal Weight ETF / Quality proxy</div>
+      <span class="pill" style="background:#AFA9EC;color:#26215C">ETF D — Quality/Safety</span>
+    </div>
+    <div class="etf-body">
+      <div class="er"><span class="erl">Tracks</span><span class="erv">Nifty 50 Equal Weight (quality proxy)</span></div>
+      <div class="er"><span class="erl">Expense ratio</span><span class="erv">~0.18%</span></div>
+      <div class="er"><span class="erl">Factor logic</span><span class="erv">Equal weight removes size bias, adds quality tilt</span></div>
+      <div class="er"><span class="erl">Rebalances</span><span class="erv">Quarterly</span></div>
+      <div class="er"><span class="erl">Behaviour</span><span class="erv">Defensive anchor — holds up in crashes</span></div>
+    </div>
+  </div>
+</div>
+
+<p style="font-size:11px;color:var(--color-text-tertiary);line-height:1.7;margin-bottom:1.5rem">Note: ETF D uses DSP Nifty 50 Equal Weight ETF as the quality/safety proxy because a pure Nifty Quality 30 ETF with adequate AUM and liquidity is not yet available on NSE. Substitute with LIQUIDBEES (LiquidBeES) as the cash-equivalent parking position during extreme risk-off. When Nifty Quality 30 ETF AUM crosses ₹500 Cr with daily volume &gt; ₹2 Cr, switch to it.</p>
+
+<div class="lbl">The 3 market regimes — every rule ties back to these</div>
+<div class="regime-row">
+  <div class="rc" style="background:#EAF3DE">
+    <div class="rc-label">Regime 1</div>
+    <div class="rc-pct" style="color:#3B6D11">BULL</div>
+    <div class="rc-name" style="color:#27500A">Trending up, low fear</div>
+  </div>
+  <div class="rc" style="background:#FAEEDA">
+    <div class="rc-label">Regime 2</div>
+    <div class="rc-pct" style="color:#854F0B">CHOPPY</div>
+    <div class="rc-name" style="color:#633806">Sideways, uncertain</div>
+  </div>
+  <div class="rc" style="background:#FCEBEB">
+    <div class="rc-label">Regime 3</div>
+    <div class="rc-pct" style="color:#A32D2D">BEAR</div>
+    <div class="rc-name" style="color:#791F1F">Trending down, high fear</div>
+  </div>
+</div>
+
+<div class="lbl">The 6 quantitative signals — compute every last Sunday of the month</div>
+<div class="sig-grid">
+  <div class="sig-card">
+    <div class="sig-label">Signal 1 — Nifty 50 trend</div>
+    <div class="sig-formula">S1 = Nifty50_Close vs 200-DMA
+Bull: Close &gt; 200DMA × 1.02
+Bear: Close &lt; 200DMA × 0.98
+Choppy: between these bands</div>
+  </div>
+  <div class="sig-card">
+    <div class="sig-label">Signal 2 — Nifty 200 breadth</div>
+    <div class="sig-formula">S2 = % of Nifty 200 stocks
+     above their own 50-DMA
+Bull:  S2 &gt; 60%
+Bear:  S2 &lt; 35%
+Choppy: 35–60%</div>
+  </div>
+  <div class="sig-card">
+    <div class="sig-label">Signal 3 — India VIX level</div>
+    <div class="sig-formula">S3 = India VIX monthly close
+Bull:  VIX &lt; 15
+Choppy: VIX 15–22
+Bear:  VIX &gt; 22</div>
+  </div>
+  <div class="sig-card">
+    <div class="sig-label">Signal 4 — Momentum ETF drawdown</div>
+    <div class="sig-formula">S4 = MOM30IETF drawdown
+     from its own 52-week high
+Risk-on:  Drawdown &lt; 10%
+Caution:  Drawdown 10–20%
+Risk-off: Drawdown &gt; 20%</div>
+  </div>
+  <div class="sig-card">
+    <div class="sig-label">Signal 5 — Alpha ETF 3M return</div>
+    <div class="sig-formula">S5 = ALPHA ETF 3-month
+     trailing return
+Strong:  S5 &gt; +8%
+Neutral: S5 -3% to +8%
+Weak:   S5 &lt; -3%</div>
+  </div>
+  <div class="sig-card">
+    <div class="sig-label">Signal 6 — FII flow</div>
+    <div class="sig-formula">S6 = FII net equity flows
+     trailing 3-month sum (NSE data)
+Positive: &gt; ₹0 (net buyer)
+Negative: &lt; ₹0 (net seller)
+Extreme:  &lt; -₹10,000 Cr/mth</div>
+  </div>
+</div>
+
+<div class="lbl">Regime classification rule — compute monthly</div>
+<div class="card">
+  <div class="rule-item"><div class="ri-num" style="color:#27500A">BULL</div><div class="ri-body"><b>ALL of these must be true:</b> S1 = Bull AND S2 &gt; 60% AND S3 &lt; 15 AND S4 &lt; 10% AND S5 &gt; +8% AND S6 positive. If all 6 pass → confirmed Bull regime.</div></div>
+  <div class="rule-item"><div class="ri-num" style="color:#791F1F">BEAR</div><div class="ri-body"><b>ANY 3 of these must be true:</b> S1 = Bear AND/OR S2 &lt; 35% AND/OR S3 &gt; 22 AND/OR S4 &gt; 20% AND/OR S5 &lt; -3% AND/OR S6 extreme negative. 3+ triggers → Bear regime.</div></div>
+  <div class="rule-item"><div class="ri-num" style="color:#633806">CHOPPY</div><div class="ri-body"><b>Neither Bull nor Bear:</b> All other combinations. Default state when signals are mixed. The system defaults to Choppy when in doubt — protects from overtrading.</div></div>
+  <div class="rule-item"><div class="ri-num" style="color:#3C3489">LOCK</div><div class="ri-body"><b>Regime change requires 2 consecutive monthly confirmations.</b> If Bull→Bear signal fires in month 1, recheck month 2 before acting. Prevents false signals and whipsaws. Exception: Bear trigger with S3 &gt; 30 (panic VIX) — act immediately without wait.</div></div>
+</div>
+
+<div class="lbl">Portfolio allocation by regime — the core switching table</div>
+
+<div style="margin-bottom:6px;font-size:11px;font-weight:500;color:#27500A">Regime 1 — BULL</div>
+<div class="regime-row">
+  <div class="rc" style="background:#EAF3DE"><div class="rc-label">ETF A — MOM30</div><div class="rc-pct" style="color:#3B6D11">40%</div><div class="rc-name" style="color:#27500A">Max momentum</div></div>
+  <div class="rc" style="background:#EAF3DE"><div class="rc-label">ETF B — ALPHA</div><div class="rc-pct" style="color:#3B6D11">35%</div><div class="rc-name" style="color:#27500A">Alpha capture</div></div>
+  <div class="rc" style="background:#EAF3DE"><div class="rc-label">ETF C — ALPL30</div><div class="rc-pct" style="color:#3B6D11">20%</div><div class="rc-name" style="color:#27500A">Partial buffer</div></div>
+  <div class="rc" style="background:#EAF3DE"><div class="rc-label">ETF D — QUAL/EW</div><div class="rc-pct" style="color:#3B6D11">5%</div><div class="rc-name" style="color:#27500A">Minimum safety</div></div>
+</div>
+
+<div style="margin-bottom:6px;font-size:11px;font-weight:500;color:#633806">Regime 2 — CHOPPY</div>
+<div class="regime-row">
+  <div class="rc" style="background:#FAEEDA"><div class="rc-label">ETF A — MOM30</div><div class="rc-pct" style="color:#854F0B">20%</div><div class="rc-name" style="color:#633806">Reduced momentum</div></div>
+  <div class="rc" style="background:#FAEEDA"><div class="rc-label">ETF B — ALPHA</div><div class="rc-pct" style="color:#854F0B">20%</div><div class="rc-name" style="color:#633806">Reduced alpha</div></div>
+  <div class="rc" style="background:#FAEEDA"><div class="rc-label">ETF C — ALPL30</div><div class="rc-pct" style="color:#854F0B">40%</div><div class="rc-name" style="color:#633806">Core position</div></div>
+  <div class="rc" style="background:#FAEEDA"><div class="rc-label">ETF D — QUAL/EW</div><div class="rc-pct" style="color:#854F0B">20%</div><div class="rc-name" style="color:#633806">Safety buffer</div></div>
+</div>
+
+<div style="margin-bottom:6px;font-size:11px;font-weight:500;color:#791F1F">Regime 3 — BEAR</div>
+<div class="regime-row">
+  <div class="rc" style="background:#FCEBEB"><div class="rc-label">ETF A — MOM30</div><div class="rc-pct" style="color:#A32D2D">0%</div><div class="rc-name" style="color:#791F1F">Fully stopped</div></div>
+  <div class="rc" style="background:#FCEBEB"><div class="rc-label">ETF B — ALPHA</div><div class="rc-pct" style="color:#A32D2D">0%</div><div class="rc-name" style="color:#791F1F">Fully stopped</div></div>
+  <div class="rc" style="background:#FCEBEB"><div class="rc-label">ETF C — ALPL30</div><div class="rc-pct" style="color:#A32D2D">30%</div><div class="rc-name" style="color:#791F1F">Defensive hold</div></div>
+  <div class="rc" style="background:#FCEBEB"><div class="rc-label">ETF D — QUAL/EW</div><div class="rc-pct" style="color:#A32D2D">70%</div><div class="rc-name" style="color:#791F1F">Max quality</div></div>
+</div>
+<p style="font-size:11px;color:var(--color-text-tertiary);margin-bottom:1.5rem;line-height:1.6">Bear regime: If ETF D (Qual/EW) drawdown also exceeds 15%, shift 30% of ETF D allocation to LIQUIDBEES (pure cash equivalent, earns call money rate ~6%). Resume when Bear regime ends.</p>
+
+<div class="lbl">Allocation through market regimes — visual</div>
+<div class="phase-track">
+  <div class="phase-row">
+    <div class="ph-label">BULL</div>
+    <div class="ph-bar-wrap">
+      <div class="ph-seg" style="width:40%;background:#C0DD97;color:#173404">A 40%</div>
+      <div class="ph-seg" style="width:35%;background:#97C459;color:#173404">B 35%</div>
+      <div class="ph-seg" style="width:20%;background:#639922;color:#EAF3DE">C 20%</div>
+      <div class="ph-seg" style="width:5%;background:#3B6D11;color:#EAF3DE">D</div>
+    </div>
+  </div>
+  <div class="phase-row">
+    <div class="ph-label">CHOPPY</div>
+    <div class="ph-bar-wrap">
+      <div class="ph-seg" style="width:20%;background:#FAC775;color:#412402">A 20%</div>
+      <div class="ph-seg" style="width:20%;background:#EF9F27;color:#412402">B 20%</div>
+      <div class="ph-seg" style="width:40%;background:#BA7517;color:#FAEEDA">C 40%</div>
+      <div class="ph-seg" style="width:20%;background:#854F0B;color:#FAEEDA">D 20%</div>
+    </div>
+  </div>
+  <div class="phase-row">
+    <div class="ph-label">BEAR</div>
+    <div class="ph-bar-wrap">
+      <div class="ph-seg" style="width:30%;background:#AFA9EC;color:#26215C">C 30%</div>
+      <div class="ph-seg" style="width:70%;background:#534AB7;color:#EEEDFE">D 70%</div>
+    </div>
+  </div>
+</div>
+
+<div class="lbl">Rule set — switching, stopping, resuming, rebalancing</div>
+
+<div class="tab-row">
+  <div class="tab on" onclick="showTab('switch')">Switching rules</div>
+  <div class="tab" onclick="showTab('rebal')">Rebalancing rules</div>
+  <div class="tab" onclick="showTab('stop')">Stop / resume</div>
+  <div class="tab" onclick="showTab('sip')">SIP rules</div>
+</div>
+
+<div id="tab-switch" class="panel on">
+  <div class="rule-block">
+    <div class="rule-head" style="background:#EAF3DE;color:#27500A">Bull → Choppy transition rules</div>
+    <div class="rule-body">
+      <div class="rule-item"><div class="ri-num" style="color:#27500A">SW1</div><div class="ri-body"><b>Trigger:</b> 2 consecutive months where S1 drops to Choppy band OR S2 falls below 50% OR VIX crosses above 18.</div></div>
+      <div class="rule-item"><div class="ri-num" style="color:#27500A">SW2</div><div class="ri-body"><b>Action:</b> Sell MOM30 down from 40% → 20%. Sell ALPHA down from 35% → 20%. Buy ALPL30 up to 40%. Buy ETF D up to 20%.</div></div>
+      <div class="rule-item"><div class="ri-num" style="color:#27500A">SW3</div><div class="ri-body"><b>Execution:</b> Do NOT sell all at once. Reduce 50% of the planned change in week 1, remaining 50% in week 3. Over 3-week window.</div></div>
+    </div>
+  </div>
+  <div class="rule-block">
+    <div class="rule-head" style="background:#FAEEDA;color:#854F0B">Choppy → Bear transition rules</div>
+    <div class="rule-body">
+      <div class="rule-item"><div class="ri-num" style="color:#854F0B">SW4</div><div class="ri-body"><b>Trigger:</b> Any 3 Bear signals fire simultaneously OR S3 (VIX) crosses 25 (single trigger, no wait required).</div></div>
+      <div class="rule-item"><div class="ri-num" style="color:#854F0B">SW5</div><div class="ri-body"><b>Action:</b> Sell MOM30 to 0% and ALPHA to 0% within 5 trading days. Raise ETF D to 70%. This is the most important rule — momentum bleeds in bear markets.</div></div>
+      <div class="rule-item"><div class="ri-num" style="color:#854F0B">SW6</div><div class="ri-body"><b>Execution:</b> Sell MOM30 and ALPHA over 3 days (1/3 each day). Prevents market impact on large switches. Buy ETF D simultaneously.</div></div>
+    </div>
+  </div>
+  <div class="rule-block">
+    <div class="rule-head" style="background:#E6F1FB;color:#185FA5">Bear → Choppy (recovery) transition rules</div>
+    <div class="rule-body">
+      <div class="rule-item"><div class="ri-num" style="color:#185FA5">SW7</div><div class="ri-body"><b>Trigger:</b> 2 consecutive months where S1 returns to Choppy band AND S2 &gt; 40% AND VIX &lt; 20 AND S4 drawdown stabilises (MOM30 stops making new lows).</div></div>
+      <div class="rule-item"><div class="ri-num" style="color:#185FA5">SW8</div><div class="ri-body"><b>Action:</b> Move to Choppy allocation first — do NOT jump straight to Bull even if all signals look green. The 2-step recovery (Bear→Choppy→Bull) prevents premature re-entry into volatile assets.</div></div>
+      <div class="rule-item"><div class="ri-num" style="color:#185FA5">SW9</div><div class="ri-body"><b>Alpha/Momentum re-entry:</b> When MOM30IETF closes above its own 200-DMA AND ALPHA ETF 1-month return turns positive — begin adding MOM30 and ALPHA in 10% increments monthly, not all at once.</div></div>
+    </div>
+  </div>
+  <div class="rule-block">
+    <div class="rule-head" style="background:#EEEDFE;color:#534AB7">Choppy → Bull (full risk-on) transition rules</div>
+    <div class="rule-body">
+      <div class="rule-item"><div class="ri-num" style="color:#534AB7">SW10</div><div class="ri-body"><b>Trigger:</b> ALL 6 signals simultaneously bullish for 2 consecutive months. No exceptions — all 6 must be green.</div></div>
+      <div class="rule-item"><div class="ri-num" style="color:#534AB7">SW11</div><div class="ri-body"><b>Action:</b> Raise MOM30 to 40%, ALPHA to 35%. Reduce ALPL30 to 20%, ETF D to 5%. This maximises capture of the early bull phase which is historically the best return period.</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-rebal" class="panel">
+  <div class="card">
+    <div class="rule-item"><div class="ri-num" style="color:#27500A">RB1</div><div class="ri-body"><b>Mandatory semi-annual rebalance:</b> Every first week of June and December, regardless of regime. Compare actual allocation vs. regime target. Rebalance if any ETF drifts more than <b>±7 percentage points</b> from target.</div></div>
+    <div class="rule-item"><div class="ri-num" style="color:#27500A">RB2</div><div class="ri-body"><b>Monthly drift check:</b> Every last Sunday of month, calculate allocation percentages. If any ETF exceeds target by &gt;10 pp — trigger immediate rebalance. This catches momentum ETF runups in bull phases.</div></div>
+    <div class="rule-item"><div class="ri-num" style="color:#27500A">RB3</div><div class="ri-body"><b>Within-regime rebalancing formula:</b> If MOM30 allocation drifts from 40% → 50% in Bull (due to outperformance), sell the excess 10% and distribute equally to ALPL30 and ETF D. Lock in gains systematically.</div></div>
+    <div class="rule-item"><div class="ri-num" style="color:#27500A">RB4</div><div class="ri-body"><b>Tax-aware rebalance order:</b> First — redirect new SIP contributions to underweight ETFs. Second — sell units held for &gt;12 months (LTCG rate). Third — sell short-term holdings only if the drift exceeds 15 pp (drift too large to correct via SIP alone).</div></div>
+    <div class="rule-item"><div class="ri-num" style="color:#27500A">RB5</div><div class="ri-body"><b>LTCG harvest rule:</b> Every March, sell and immediately repurchase up to ₹1.25L of gains across all ETFs. This resets cost basis tax-free under the annual LTCG exemption. Priority: sell highest-gain ETF first.</div></div>
+    <div class="rule-item"><div class="ri-num" style="color:#27500A">RB6</div><div class="ri-body"><b>Post-regime-switch rebalance:</b> After any regime switch, wait 10 trading days before conducting any additional rebalance. Let the switch settle and prices stabilise before fine-tuning.</div></div>
+  </div>
+</div>
+
+<div id="tab-stop" class="panel">
+  <div class="card">
+    <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:.5rem">SIP pause rules — when to stop SIP contributions</div>
+    <div class="rule-item"><div class="ri-num" style="color:#791F1F">P1</div><div class="ri-body"><b>Pause SIP into MOM30 (ETF A)</b> when: S4 (MOM30 drawdown from 52W high) exceeds 15% OR regime switches to Bear. Resume when S4 recovers below 10% AND regime is Choppy or Bull.</div></div>
+    <div class="rule-item"><div class="ri-num" style="color:#791F1F">P2</div><div class="ri-body"><b>Pause SIP into ALPHA (ETF B)</b> when: S5 (ALPHA 3M return) falls below -5% OR regime is Bear. Never stop SIP into ALPHA in Choppy regime — it often marks near the bottom.</div></div>
+    <div class="rule-item"><div class="ri-num" style="color:#791F1F">P3</div><div class="ri-body"><b>NEVER pause SIP into ETF C (ALPL30)</b> under any condition. This is your all-weather ETF. Continuous accumulation here provides the rebalancing pool in Bear markets.</div></div>
+    <div class="rule-item"><div class="ri-num" style="color:#791F1F">P4</div><div class="ri-body"><b>During Bear regime:</b> Redirect all paused SIP amounts (from A and B) into ETF D (Qual/EW). Do not reduce total SIP amount — redirect, not stop. You buy cheap quality during bear markets.</div></div>
+  </div>
+  <div class="card" style="margin-top:.25rem">
+    <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:.5rem">Resume rules — when to restart stopped SIPs</div>
+    <div class="rule-item"><div class="ri-num" style="color:#3B6D11">R1</div><div class="ri-body"><b>Resume MOM30 SIP</b> when: Regime confirms Choppy for 2 consecutive months AND MOM30 closes above its own 100-DMA AND S3 (VIX) falls below 20.</div></div>
+    <div class="rule-item"><div class="ri-num" style="color:#3B6D11">R2</div><div class="ri-body"><b>Resume ALPHA SIP</b> when: S5 (3M return) turns positive AND regime is Choppy or Bull AND India VIX is below 18.</div></div>
+    <div class="rule-item"><div class="ri-num" style="color:#3B6D11">R3</div><div class="ri-body"><b>Resume at 50% of normal SIP amount</b> for the first month after any Bear→Choppy switch. Restore to 100% the following month if signals remain stable. Prevents over-committing during false recoveries.</div></div>
+  </div>
+</div>
+
+<div id="tab-sip" class="panel">
+  <div class="card">
+    <div class="rule-item"><div class="ri-num" style="color:#185FA5">S1</div><div class="ri-body"><b>SIP date:</b> Always invest on the 7th of each month (or next trading day). Consistent date removes timing bias.</div></div>
+    <div class="rule-item"><div class="ri-num" style="color:#185FA5">S2</div><div class="ri-body"><b>Bull regime SIP split:</b> 40% → MOM30, 35% → ALPHA, 20% → ALPL30, 5% → ETF D. Example on ₹20,000 SIP: ₹8,000 / ₹7,000 / ₹4,000 / ₹1,000.</div></div>
+    <div class="rule-item"><div class="ri-num" style="color:#185FA5">S3</div><div class="ri-body"><b>Choppy regime SIP split:</b> 20% → MOM30, 20% → ALPHA, 40% → ALPL30, 20% → ETF D. Example: ₹4,000 / ₹4,000 / ₹8,000 / ₹4,000.</div></div>
+    <div class="rule-item"><div class="ri-num" style="color:#185FA5">S4</div><div class="ri-body"><b>Bear regime SIP split:</b> 0% → MOM30, 0% → ALPHA, 30% → ALPL30, 70% → ETF D. Example: ₹0 / ₹0 / ₹6,000 / ₹14,000.</div></div>
+    <div class="rule-item"><div class="ri-num" style="color:#185FA5">S5</div><div class="ri-body"><b>Lump sum crash rule:</b> If Nifty 50 falls &gt;20% from its all-time high in any 3-month window, deploy additional lump sum (50% into ALPL30, 50% into ETF D) in 3 tranches over 6 weeks. Never into MOM30 during a crash — momentum ETFs compound losses.</div></div>
+    <div class="rule-item"><div class="ri-num" style="color:#185FA5">S6</div><div class="ri-body"><b>Annual SIP step-up:</b> Increase SIP by minimum 10% every April. Compound SIP growth, not just portfolio growth.</div></div>
+  </div>
+</div>
+
+<div class="lbl">Factor performance by market phase — when each ETF wins and loses</div>
+<table class="compare-tbl">
+  <thead>
+    <tr>
+      <th style="text-align:left">Market condition</th>
+      <th>MOM30 (A)</th>
+      <th>ALPHA (B)</th>
+      <th>ALPL30 (C)</th>
+      <th>Qual/EW (D)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Strong bull (Nifty +25%/yr)</td><td style="color:#27500A">★★★★★</td><td style="color:#27500A">★★★★★</td><td style="color:#633806">★★★☆☆</td><td style="color:#791F1F">★★☆☆☆</td></tr>
+    <tr><td>Moderate bull (Nifty +12%/yr)</td><td style="color:#27500A">★★★★☆</td><td style="color:#27500A">★★★★☆</td><td style="color:#27500A">★★★★☆</td><td style="color:#633806">★★★☆☆</td></tr>
+    <tr><td>Sideways / choppy market</td><td style="color:#791F1F">★★☆☆☆</td><td style="color:#633806">★★★☆☆</td><td style="color:#27500A">★★★★☆</td><td style="color:#27500A">★★★★☆</td></tr>
+    <tr><td>Bear market (Nifty -20%)</td><td style="color:#791F1F">★☆☆☆☆</td><td style="color:#791F1F">★☆☆☆☆</td><td style="color:#633806">★★★☆☆</td><td style="color:#27500A">★★★★☆</td></tr>
+    <tr><td>Sharp crash (Nifty -35%+)</td><td style="color:#791F1F">★☆☆☆☆</td><td style="color:#791F1F">★☆☆☆☆</td><td style="color:#633806">★★★☆☆</td><td style="color:#27500A">★★★★☆</td></tr>
+    <tr><td>Post-crash recovery (first 6 mths)</td><td style="color:#633806">★★★☆☆</td><td style="color:#27500A">★★★★☆</td><td style="color:#27500A">★★★★☆</td><td style="color:#633806">★★★☆☆</td></tr>
+    <tr><td>High inflation (CPI &gt;7%)</td><td style="color:#633806">★★★☆☆</td><td style="color:#633806">★★★☆☆</td><td style="color:#27500A">★★★★☆</td><td style="color:#27500A">★★★★☆</td></tr>
+  </tbody>
+</table>
+<p style="font-size:11px;color:var(--color-text-tertiary);margin:.75rem 0 1.5rem;line-height:1.6">Stars = relative outperformance vs. Nifty 50 in that condition. This is the academic basis for rotating between these factors.</p>
+
+<div class="lbl">Rules you must never break</div>
+<div class="wb-r"><p><b>Never hold MOM30 or ALPHA in a confirmed Bear regime.</b> Momentum factors bleed catastrophically in bear markets — they own the stocks that were recently strong (often the most overvalued). The 2008 and 2020 crashes show MOM30-equivalent strategies fell 55–65% versus Nifty's 38–50%.</p></div>
+<div class="wb-r"><p><b>Never switch regime on a single month's signal.</b> The 2-month confirmation rule exists precisely because a single bad VIX reading or FII outflow day can trigger a false alarm. Whipsaws cost more than the drawdown they prevent.</p></div>
+<div class="wb-a"><p><b>Never stop SIP entirely.</b> Even in Bear regime, redirect to ETF D. Stopping SIP is the number-one way to miss the recovery that always follows every Indian bear market.</p></div>
+<div class="wb-a"><p><b>Never rebalance back to momentum during a crash rally.</b> Bear market rallies of 10–15% are common. Wait for 2-month Choppy confirmation before re-adding MOM30 and ALPHA. The rally may be a dead-cat bounce.</p></div>
+<div class="wb-g"><p><b>Always use limit orders when switching ETF positions.</b> Smart beta ETFs have wider bid-ask spreads than plain Nifty ETFs. A market order on MOM30IETF for large amounts can move your own execution price 0.3–0.5% against you.</p></div>
+
+<div class="lbl">Monthly monitoring checklist — 30 minutes per month</div>
+<div class="card">
+  <div class="step-row"><div class="sn">1</div><div class="sb2">Last Sunday of month: Pull Nifty 50 closing price and its 200-DMA from Investing.com or TradingView. Compute S1.</div></div>
+  <div class="step-row"><div class="sn">2</div><div class="sb2">Pull India VIX monthly close from NSE website. Compute S3.</div></div>
+  <div class="step-row"><div class="sn">3</div><div class="sb2">Pull MOM30IETF price from NSE. Compare to its 52-week high. Compute S4 (drawdown %).</div></div>
+  <div class="step-row"><div class="sn">4</div><div class="sb2">Pull ALPHA ETF 3-month trailing return from INDmoney or Kuvera. Compute S5.</div></div>
+  <div class="step-row"><div class="sn">5</div><div class="sb2">Pull FII monthly net equity flow from NSE website (market data → FII/DII data). Compute 3-month sum for S6.</div></div>
+  <div class="step-row"><div class="sn">6</div><div class="sb2">Score all 6 signals. Determine if regime has changed. If yes — is this 2nd consecutive month of the same new regime? If yes → execute switch per rules SW1–SW11.</div></div>
+  <div class="step-row"><div class="sn">7</div><div class="sb2">Check current portfolio allocation vs. regime target. If any ETF drifted &gt;7pp → note for June/December rebalance. If &gt;10pp → immediate rebalance.</div></div>
+  <div class="step-row"><div class="sn">8</div><div class="sb2">Confirm next month SIP allocation matches current regime. Transfer correct amounts.</div></div>
+</div>
+
+<div style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:8px">
+  <button onclick="sendPrompt('Show me exactly how this smart beta rotation strategy would have performed during the 2020 COVID crash and recovery in India — what signals would have fired and what trades would have been made?')">2020 crash simulation ↗</button>
+  <button onclick="sendPrompt('Build me a Google Sheets template with all 6 signals, regime classifier, and allocation calculator for this smart beta strategy')">Build tracking spreadsheet ↗</button>
+  <button onclick="sendPrompt('What are the key differences between Nifty Alpha 50 and Nifty 200 Momentum 30 and why does the rotation between them matter so much?')">Alpha vs momentum deep dive ↗</button>
+</div>
+</div>
+
+<script>
+function showTab(id){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on')});
+  event.target.classList.add('on');
+  document.getElementById('tab-'+id).classList.add('on');
+}
+</script>
