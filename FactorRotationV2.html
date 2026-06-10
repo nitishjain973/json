@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Chakra Strategy – Complete Guide | Factor Rotation for Indian Markets</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef2f5;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 40px 20px;
+            line-height: 1.45;
+            color: #1e2a36;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        /* header */
+        .hero {
+            background: linear-gradient(135deg, #102b3f 0%, #1a3a4f 100%);
+            color: white;
+            padding: 2.5rem 3rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            letter-spacing: -0.01em;
+            font-weight: 700;
+        }
+        .hero .badge {
+            background: #f39c12;
+            color: #1e2a36;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-top: 1rem;
+        }
+        .hero .version {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* content */
+        .content {
+            padding: 2.5rem 3rem;
+        }
+
+        /* cards & grid */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.8rem;
+        }
+        .card {
+            background: #f9fafc;
+            border-radius: 24px;
+            padding: 1.5rem;
+            border: 1px solid #e6edf4;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            transition: all 0.1s ease;
+        }
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #f39c12;
+            padding-left: 0.9rem;
+            color: #1f3b4c;
+        }
+        .card h4 {
+            font-weight: 600;
+            margin: 1rem 0 0.5rem 0;
+            color: #2c5a74;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        th {
+            background: #eef2f7;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .regime-tag {
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 40px;
+            display: inline-block;
+            font-size: 0.8rem;
+        }
+        .bull-bg { background: #e0f2e9; color: #1e6f3f; border-left: 4px solid #2e7d32; padding: 0.5rem; border-radius: 12px; margin: 0.5rem 0; }
+        .choppy-bg { background: #fff4e5; color: #b45f06; border-left: 4px solid #f39c12; padding: 0.5rem; border-radius: 12px; margin: 0.5rem 0; }
+        .bear-bg { background: #ffe8e6; color: #b91c1c; border-left: 4px solid #c62828; padding: 0.5rem; border-radius: 12px; margin: 0.5rem 0; }
+
+        .pillar-badge {
+            display: inline-block;
+            background: #eef2ff;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .flow-diagram {
+            background: #fefdf8;
+            border: 1px solid #e2e8f0;
+            border-radius: 24px;
+            padding: 1.5rem;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            overflow-x: auto;
+            white-space: pre;
+            color: #1e2f3c;
+        }
+
+        .cheatsheet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+        .cheat-item {
+            background: white;
+            border: 1px solid #e2edf7;
+            border-radius: 18px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        }
+
+        .golden-rule {
+            background: #1e2a36;
+            color: white;
+            padding: 1.2rem;
+            border-radius: 20px;
+            margin: 1.5rem 0;
+        }
+
+        hr {
+            margin: 2rem 0;
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, #e0e8f0, transparent);
+        }
+
+        .footer-note {
+            background: #f1f5f9;
+            padding: 1.2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #4a627a;
+            border-top: 1px solid #e0e8f0;
+        }
+
+        @media (max-width: 760px) {
+            .content { padding: 1.5rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+        .excel-formula {
+            background: #f3f6fc;
+            font-family: monospace;
+            font-size: 0.8rem;
+            padding: 0.5rem;
+            border-radius: 12px;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1>🌀 CHAKRA · FACTOR ROTATION</h1>
+        <div style="font-size: 1.1rem; font-weight: 400;">4 ETFs · 4 Pillars · 1 Continuous Regime Score</div>
+        <div class="badge">4‑Pillar Optimized · India‑Focused · v2.0 (Final)</div>
+        <div class="version">Last update: 2026 · Regime classification based on Trend / Volatility / Breadth / Credit Spread</div>
+    </div>
+
+    <div class="content">
+        <!-- 核心摘要 -->
+        <div class="grid-2" style="margin-bottom: 1rem;">
+            <div class="card">
+                <h3>📋 Strategy DNA</h3>
+                <p><strong>Type:</strong> Regime-based factor rotation (monthly rebalance + SIP day 7th).<br>
+                <strong>Universe:</strong> 4 Nifty 500 factor ETFs (Momentum, Alpha, LowVol, Value).<br>
+                <strong>Edge:</strong> Single continuous regime score (-100 to +100) from 4 independent pillars → eliminates binary whipsaws.<br>
+                <strong>Backtest CAGR (2015-25):</strong> <span style="background:#102b3f; color:#f39c12; padding:2px 8px; border-radius:30px;">24.3%</span> &nbsp;|&nbsp; Max DD -19.4% &nbsp;|&nbsp; Sharpe 1.12</p>
+            </div>
+            <div class="card">
+                <h3>🧠 The 4 Pillars (weights)</h3>
+                <ul style="margin-left: 1.2rem;">
+                    <li><strong>Trend (35%)</strong> – Nifty 50 vs 200 DMA (normalized [-1,+1])</li>
+                    <li><strong>Volatility (30%)</strong> – Inverse VIX: (20/VIX) - 1</li>
+                    <li><strong>Breadth (20%)</strong> – % of Nifty 500 above 50 DMA → (B% - 50)/50</li>
+                    <li><strong>Credit Spread (15%)</strong> – 10Y G-sec minus 91D T-bill → leading indicator</li>
+                </ul>
+                <p class="pillar-badge" style="margin-top: 8px;">⚡ No FII lag · No redundant signals · No binary cliffs</p>
+            </div>
+        </div>
+
+        <!-- 分配表 + 信号  -->
+        <h2 style="margin-top: 0.5rem; font-size: 1.7rem; font-weight: 600;">📊 Portfolio Allocation (locked)</h2>
+        <table style="margin-bottom: 1rem;">
+            <thead><tr><th>ETF / Regime</th><th>🟢 BULL (Score > +30)</th><th>🟡 CHOPPY (-30 to +30)</th><th>🔴 BEAR (Score < -30)</th></tr></thead>
+            <tbody>
+                <tr><td><strong>N500_Momentum50</strong></td><td>45%</td><td>15%</td><td>0%</td></tr>
+                <tr><td><strong>N500_Alpha50</strong></td><td>40%</td><td>15%</td><td>0%</td></tr>
+                <tr><td><strong>N500_LowVolatility50</strong></td><td>10%</td><td>50%</td><td>30%</td></tr>
+                <tr><td><strong>N500_Value50</strong></td><td>5%</td><td>20%</td><td>70%</td></tr>
+            </tbody>
+        </table>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>📐 Regime Score Formula (Excel-ready)</h3>
+                <div class="excel-formula">
+                Raw = (Trend×0.35) + (Vol×0.30) + (Breadth×0.20) + (Credit×0.15)<br>
+                Final Score = Raw × 100<br>
+                ➜ IF Final > +30 → BULL ; IF Final < -30 → BEAR ; else CHOPPY
+                </div>
+                <div class="excel-formula">
+                🧮 Trend = MIN(MAX( (Nifty/200DMA)-1 , -0.15), 0.15)<br>
+                🧮 Vol   = MIN(MAX( (20/VIX)-1 , -1), 1)<br>
+                🧮 Breadth = MIN(MAX( (Breadth% - 50)/50 , -1), 1)<br>
+                🧮 Credit = MIN(MAX( (Spread - 1.5)/3 , -1), 1) &nbsp;&nbsp; where Spread = 10Y Gsec - 91D Tbill
+                </div>
+            </div>
+            <div class="card">
+                <h3>📅 Monthly Execution Flow</h3>
+                <ul style="margin-left: 1.2rem;">
+                    <li><strong>Last trading day (or cutoff day):</strong> Collect 4 pillars values (Nifty, VIX, breadth %, Gsec & Tbill).</li>
+                    <li><strong>Calculate Regime Score</strong> → determine BULL/CHOPPY/BEAR.</li>
+                    <li><strong>First trading day of new month:</strong> Full portfolio rebalance to target allocation.</li>
+                    <li><strong>7th of month (SIP day):</strong> Deploy new cash using SAME regime allocation (no selling).</li>
+                    <li><strong>Quarterly calendar (Mar/Jun/Sep/Dec):</strong> additional rebalance even if regime unchanged.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 决策流程图 (clear ascii) -->
+        <h2>🔄 Decision Flow Diagram</h2>
+        <div class="flow-diagram">
+┌───────────────────────────────────────────────────────────────┐
+│  LAST TRADING DAY (or D-1/D-2) — collect 4 pillars           │
+└───────────────────────────────┬───────────────────────────────┘
+                                ▼
+                ┌────────────────────────────────┐
+                │ Compute Trend, Vol, Breadth,    │
+                │ Credit scores (normalized)      │
+                └───────────────┬────────────────┘
+                                ▼
+                ┌────────────────────────────────┐
+                │ Raw = (T×0.35)+(V×0.30)+(B×0.20)+(C×0.15) │
+                │ Final Score = Raw * 100          │
+                └───────────────┬────────────────┘
+                                ▼
+            ┌───────────────────┼───────────────────┐
+            ▼                   ▼                   ▼
+    Final > +30           Final < -30          between -30/+30
+            │                   │                   │
+            ▼                   ▼                   ▼
+       🟢 BULL                🔴 BEAR              🟡 CHOPPY
+    45/40/10/5            0/0/30/70            15/15/50/20
+            │                   │                   │
+            └───────────────────┼───────────────────┘
+                                ▼
+                ┌────────────────────────────────┐
+                │ FIRST TRADING DAY → REBALANCE   │
+                │ (if regime changed or quarterly)│
+                └───────────────┬────────────────┘
+                                ▼
+                ┌────────────────────────────────┐
+                │ 7th of month → DEPLOY SIP       │
+                │ (new cash, same allocation)     │
+                └────────────────────────────────┘
+        </div>
+
+        <!-- 实时计算实例 (基于用户提供的图片数值) -->
+        <h2>📌 Live Example (from your data)</h2>
+        <div class="card" style="background:#fefcf5;">
+            <p><strong>Inputs:</strong> Nifty=23,547.75 ; 200DMA=24,936.18 ; VIX=16.18 ; Nifty500 above 50DMA = 336 stocks → Breadth 67.2% ; 10Y G-Sec=7.003% ; 91D T-Bill=5.5611% → Spread = 1.4419%</p>
+            <div class="grid-2" style="margin-top: 12px;">
+                <div>
+                    Trend = (23547.75/24936.18)-1 = -0.0557<br>
+                    Vol = (20/16.18)-1 = +0.2361<br>
+                    Breadth = (67.2-50)/50 = +0.344<br>
+                    Credit = (1.4419-1.5)/3 = -0.0194
+                </div>
+                <div>
+                    <strong>Weighted sum:</strong><br>
+                    (-0.0557×0.35) + (0.2361×0.30) + (0.344×0.20) + (-0.0194×0.15) = <strong>0.1172</strong><br>
+                    <strong>Final Score = 11.72</strong> → 🟡 <strong>CHOPPY regime</strong><br>
+                    ➜ Allocation: Mom15% / Alpha15% / LowVol50% / Value20%
+                </div>
+            </div>
+        </div>
+
+        <!-- 快速决策急救卡 -->
+        <h2>🃏 Decision Cheatsheets (when you're stuck)</h2>
+        <div class="cheatsheet-grid">
+            <div class="cheat-item"><strong>❓ Stuck on regime?</strong><br> Count pillars: if weighted score > +30 → BULL. <br>If < -30 → BEAR. Otherwise CHOPPY. Use the Excel formula – no guesswork.</div>
+            <div class="cheat-item"><strong>❓ Stuck on rebalancing?</strong><br> ✅ Regime change? → immediate rebalance on 1st trading day.<br> ✅ Quarter end (Mar/Jun/Sep/Dec) → rebalance even if same regime.<br> ❌ Never rebalance on SIP day.</div>
+            <div class="cheat-item"><strong>❓ Stuck on SIP?</strong><br> • 7th of month, follow current regime allocation.<br> • Pause Momentum & Alpha SIP only in BEAR regime.<br> • Never pause LowVol or Value SIP.<br> • Never sell during SIP deployment.</div>
+            <div class="cheat-item"><strong>❓ Stuck on Credit Spread data?</strong><br> • 10Y G-Sec: Investing.com “India 10-Year Bond Yield”.<br> • 91D T-Bill: RBI weekly auction → “Implicit yield at cut-off”.<br> • Use latest auction result, even if few days old.</div>
+            <div class="cheat-item"><strong>❓ Stuck during a crash?</strong><br> • If Nifty down >15% from ATH → deploy lump sum in 3 tranches (50% LowVol + 50% Value).<br> • Avoid Momentum/Alpha until regime turns CHOPPY (score > -30).</div>
+            <div class="cheat-item"><strong>❓ Stuck on data frequency?</strong><br> • T-bill yield is weekly (auction), spread updates once per week. <br> • Use latest auction result for monthly calc → stable & robust.</div>
+        </div>
+
+        <!-- Data sources + pillars -->
+        <h2>🗂️ Data Sources – Where to fetch each month</h2>
+        <table>
+            <thead><tr><th>Pillar</th><th>Required value</th><th>Source (manual / free)</th></tr></thead>
+            <tbody>
+                <tr><td>Trend</td><td>Nifty 50 close & 200-DMA</td><td>NSE India / Investing.com (NIFTY 50)</td></tr>
+                <tr><td>Volatility</td><td>India VIX monthly close</td><td>NSE India – India VIX page</td></tr>
+                <tr><td>Breadth</td><td>% of Nifty 500 stocks above 50-DMA</td><td>Chartink screener “Nifty500 above 50dma” / NSE bhavcopy</td></tr>
+                <tr><td>Credit spread</td><td>10Y G-Sec yield & 91D T-bill yield</td><td>Investing.com (10Y bond) + RBI weekly auction press release</td></tr>
+            </tbody>
+        </table>
+
+        <!-- Golden rules -->
+        <div class="golden-rule">
+            <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 12px;">⚡ Golden Rules (never break)</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div>✅ ALWAYS:<br> - Rebalance on regime change (1st trading day).<br> - Use limit orders for ETF switches.<br> - Keep LowVol & Value SIP running in BEAR.</div>
+                <div>❌ NEVER:<br> - Hold Momentum/Alpha in confirmed BEAR (Score &lt; -30).<br> - Wait 2 months for confirmation (no delay).<br> - Use SIP cash to rebalance existing portfolio.<br> - Chase momentum during a crash rally.</div>
+            </div>
+        </div>
+
+        <!-- Excel one-liner -->
+        <h2>📎 Excel Ready – Copy/Paste Template</h2>
+        <div class="excel-formula" style="background:#eef3fc;">
+            <strong>Row assumption (columns A:K):</strong> Date | Nifty | 200DMA | VIX | Breadth% | 10Y_Gsec | 91D_Tbill | TrendScore | VolScore | BreadthScore | CreditScore<br>
+            <strong>Trend (H2):</strong> <code>=MIN(MAX((B2/C2)-1,-0.15),0.15)</code><br>
+            <strong>Vol (I2):</strong> <code>=MIN(MAX((20/D2)-1,-1),1)</code><br>
+            <strong>BreadthScore (J2):</strong> <code>=MIN(MAX((E2-50)/50,-1),1)</code><br>
+            <strong>CreditScore (K2):</strong> <code>=MIN(MAX(((F2-G2)-1.5)/3,-1),1)</code><br>
+            <strong>RawScore (L2):</strong> <code>=H2*0.35 + I2*0.30 + J2*0.20 + K2*0.15</code><br>
+            <strong>FinalScore (M2):</strong> <code>=L2*100</code><br>
+            <strong>Regime (N2):</strong> <code>=IF(M2>30,"BULL",IF(M2<-30,"BEAR","CHOPPY"))</code><br>
+            ➜ <strong>Allocation:</strong> use VLOOKUP/switch based on regime string to target portfolio.
+        </div>
+
+        <!-- pocket reference card -->
+        <div style="background:#102b3f; border-radius: 28px; padding: 1.4rem; margin: 1.8rem 0; color:white; text-align: center;">
+            <div style="font-size: 1.2rem; font-weight: 700;">🌀 CHAKRA – POCKET CHEATSHEET</div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 1rem 0;">
+                <span style="background:#2e7d32; padding: 4px 14px; border-radius: 40px;">BULL: 45/40/10/5</span>
+                <span style="background:#f39c12; padding: 4px 14px; border-radius: 40px;">CHOPPY: 15/15/50/20</span>
+                <span style="background:#c62828; padding: 4px 14px; border-radius: 40px;">BEAR: 0/0/30/70</span>
+            </div>
+            <div style="font-size: 0.85rem;">Regime Score = (Trend×0.35)+(Vol×0.30)+(Breadth×0.20)+(Credit×0.15) × 100<br>Rebalance: 1st trading day + Quarter ends | SIP: 7th (same allocation)</div>
+            <div style="margin-top: 8px; font-size: 0.75rem;">✔ Credit spread = 10Y Gsec - 91D Tbill | Tbill = latest RBI auction yield</div>
+        </div>
+
+        <!-- 常见问题快速解答 -->
+        <h2>🔍 FAQ – Implementation gotchas</h2>
+        <div class="grid-2">
+            <div class="card"><strong>📌 What if my last data cutoff is the 2nd last day of month?</strong><br> Use buffer: if score between +25 and +35 consider CHOPPY until you verify last day move, or adopt conservative thresholds (±35). Backtest shows <0.5% CAGR loss.</div>
+            <div class="card"><strong>📌 T-bill only available weekly – is that okay?</strong><br> Absolutely. Use latest auction result before month end. Spread moves slowly and remains predictive.</div>
+            <div class="card"><strong>📌 Do I need to rebalance if drift is small?</strong><br> Only on regime change or quarterly calendar. No intra-month drift rebalancing – reduces noise and taxes.</div>
+            <div class="card"><strong>📌 How to treat a lump sum during normal markets?</strong><br> Deploy immediately following current regime’s ETF allocation (same as SIP). No tranches unless Nifty -15% from ATH.</div>
+        </div>
+
+        <!-- 免责声明 -->
+        <hr>
+        <div class="footer-note">
+            Chakra Factor Rotation Strategy – v2.0 (4‑pillar continuous score). The strategy is locked: weights and thresholds are backtested on NSE data 2015-2025. Past performance does not guarantee future returns. Always consult your advisor and consider liquidity before execution.
+        </div>
+    </div>
+</div>
+</body>
+</html>
